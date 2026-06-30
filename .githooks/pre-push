@@ -1,0 +1,16 @@
+#!/bin/sh
+# Pre-push gate: lint + tests must pass before code leaves the machine.
+# Enabled via `git config core.hooksPath .githooks` (run automatically by the
+# package.json "prepare" script on `npm install`). Works in git worktrees,
+# unlike hooks installed into .git/hooks.
+#
+# Bypass in a genuine emergency with: git push --no-verify
+set -e
+
+echo "[pre-push] running lint…"
+npm run lint
+
+echo "[pre-push] running tests…"
+npm test
+
+echo "[pre-push] ✓ lint + tests passed"
