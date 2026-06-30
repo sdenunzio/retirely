@@ -1,0 +1,85 @@
+.wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #0D1B2A 0%, #1a3a5c 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+.title { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+.subtitle { font-size: 12px; color: rgba(255,255,255,.45); }
+
+.swrPicker { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.swrLabel { font-size: 11px; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .05em; }
+
+.swrOptions { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.swrBtn {
+  font-size: 12px; font-weight: 500; padding: 5px 10px;
+  border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.07); color: rgba(255,255,255,.7); cursor: pointer;
+  transition: all .12s;
+}
+.swrBtn:hover { background: rgba(255,255,255,.15); color: #fff; }
+.swrActive { background: var(--teal) !important; border-color: var(--teal-60) !important; color: #fff !important; }
+
+.swrDesc { font-size: 11px; color: rgba(255,255,255,.35); }
+
+.body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+/* Ring section */
+.ringSection { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.ringStats { display: flex; flex-direction: column; gap: 6px; }
+.fireNumberLabel { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
+.fireNumberValue { font-size: 36px; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); letter-spacing: -.03em; line-height: 1.1; }
+.fireNumberSub { font-size: 12px; color: var(--text-muted); }
+.firedBadge { display: inline-block; padding: 6px 14px; background: var(--teal-20); color: var(--teal-60); border-radius: 20px; font-size: 13px; font-weight: 600; margin-top: 4px; }
+.gap { display: flex; align-items: baseline; gap: 8px; margin-top: 4px; }
+.gapLabel { font-size: 12px; color: var(--text-muted); }
+.gapValue { font-size: 20px; font-weight: 600; color: var(--coral); font-family: var(--font-mono); }
+
+/* Stats grid */
+.statsGrid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+
+.statCard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: .85rem 1rem; }
+.statCard.accent { background: var(--teal-20); border-color: var(--teal-40); }
+.statLabel { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+.statValue { font-size: 20px; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); line-height: 1.2; }
+.statSub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+/* Explainer */
+.explainerGrid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.explainerCard { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1rem; }
+.explainerIcon { font-size: 22px; margin-bottom: 6px; }
+.explainerTitle { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+.explainerBody { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+.explainerBody strong { color: var(--text-primary); }
+
+/* Note box */
+.noteBox { background: rgba(55,138,221,.1); border: 1px solid rgba(55,138,221,.25); border-radius: var(--radius-md); padding: 1rem 1.25rem; }
+.noteTitle { font-size: 12px; font-weight: 600; color: var(--text-primary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: .75rem; }
+.noteGrid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem 1.5rem; font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+.noteGrid strong { color: var(--text-primary); }
+
+@media (max-width: 900px) {
+  .statsGrid { grid-template-columns: 1fr 1fr; }
+  .explainerGrid { grid-template-columns: 1fr; }
+  .noteGrid { grid-template-columns: 1fr; }
+  .swrPicker { align-items: flex-start; }
+  .swrOptions { justify-content: flex-start; }
+}
+@media (max-width: 480px) {
+  .statsGrid { grid-template-columns: 1fr; }
+  .ringSection { flex-direction: column; align-items: flex-start; }
+}

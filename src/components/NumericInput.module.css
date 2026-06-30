@@ -1,0 +1,119 @@
+/* ─── Shared wrapper ─────────────────────────────────────────────── */
+.wrap {
+  display: flex;
+  align-items: stretch;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  background: var(--bg-input);
+  transition: border-color .15s;
+  user-select: none;
+}
+.wrap:focus-within { border-color: var(--teal); }
+
+/* Compact — sidebar */
+.compact {
+  height: 32px;
+  width: 100%;
+}
+
+/* Full — cards and tabs */
+.full {
+  height: 44px;
+  width: 100%;
+  max-width: 280px;
+}
+
+/* ─── Buttons ─────────────────────────────────────────────────────── */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background .1s, color .1s;
+  flex-shrink: 0;
+  touch-action: manipulation;   /* eliminates 300ms tap delay on mobile */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.compact .btn  { width: 30px; }
+.full    .btn  { width: 44px; }   /* Large hit target on mobile */
+
+.btn:hover  { background: var(--teal-20); color: var(--teal); }
+.btn:active { background: var(--teal-40); }
+
+/* ─── Value area ──────────────────────────────────────────────────── */
+.valueArea {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: text;
+  padding: 0 4px;
+}
+
+.displayVal {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
+}
+
+.compact .displayVal { font-size: 12px; }
+.full    .displayVal { font-size: 15px; }
+
+.editInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--teal);
+  text-align: center;
+  -moz-appearance: textfield;
+}
+.editInput::-webkit-inner-spin-button,
+.editInput::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+.compact .editInput { font-size: 12px; }
+.full    .editInput { font-size: 15px; }
+
+/* ─── Mobile: bigger buttons ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .full {
+    height: 52px;
+    max-width: 100%;
+  }
+  .full .btn { width: 56px; }
+  .full .displayVal { font-size: 17px; }
+  .full .editInput  { font-size: 17px; }
+}
+
+/* ─── Light mode overrides ─────────────────────────────────────────── */
+[data-theme="light"] .wrap {
+  border-color: var(--border);
+  background: var(--bg-input);
+}
+[data-theme="light"] .btn {
+  background: var(--gray-05);
+  color: var(--text-secondary);
+}
+[data-theme="light"] .btn:hover {
+  background: var(--teal-20);
+  color: var(--teal-dim);
+}
+[data-theme="light"] .displayVal {
+  color: var(--text-primary);
+}
+[data-theme="light"] .editInput {
+  color: var(--teal-dim);
+}

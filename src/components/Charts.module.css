@@ -1,0 +1,102 @@
+.wrap {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem 1.25rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.tab {
+  font-size: 12.5px;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all .12s;
+}
+
+.tab:hover { background: var(--bg-elevated); }
+
+.tab.active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--text-primary);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.tooltip {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  box-shadow: var(--shadow-md);
+  min-width: 160px;
+}
+
+.tooltipAge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.tooltipRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 500;
+  gap: 12px;
+  padding: 1px 0;
+}
+
+/* ── Timeline ──────────────────────────────────────────── */
+.timelineWrap { display: flex; flex-direction: column; gap: .75rem; }
+
+.eventLegend {
+  display: flex; flex-wrap: wrap; gap: 6px 16px;
+  padding: .65rem .85rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.eventLegendItem {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--text-secondary);
+}
+.eventDot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.eventAge {
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--text-muted); font-weight: 600;
+}
+.eventName { color: var(--text-secondary); }

@@ -1,0 +1,239 @@
+.wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  padding: 1.25rem 1.5rem 1rem;
+  background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
+  border-bottom: 1px solid rgba(31,207,176,0.15);
+}
+.title { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+.subtitle { font-size: 12px; color: rgba(255,255,255,.4); }
+
+/* Body */
+.body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* Goal grid */
+.goalGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 12px;
+}
+.goalField {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: .85rem 1rem;
+}
+.goalLabel { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+.goalSub   { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
+
+/* Stepper */
+.stepWrap {
+  display: flex; align-items: center;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  height: 34px;
+}
+.stepBtn {
+  width: 30px; flex-shrink: 0;
+  background: var(--bg-elevated); border: none;
+  color: var(--text-secondary); font-size: 17px; font-weight: 400;
+  cursor: pointer; transition: background .1s, color .1s;
+  display: flex; align-items: center; justify-content: center;
+  height: 100%;
+}
+.stepBtn:hover { background: var(--bg-elevated); color: var(--text-primary); }
+.stepVal {
+  flex: 1; text-align: center;
+  font-size: 13px; font-weight: 600; font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+.stepWrap:focus-within { border-color: var(--teal); }
+
+/* Current info chips */
+.currentRow { display: flex; gap: 10px; flex-wrap: wrap; }
+.currentChip {
+  display: flex; flex-direction: column; gap: 2px;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: .55rem .85rem;
+}
+.chipLabel { font-size: 11px; color: var(--text-muted); }
+.chipVal   { font-size: 14px; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); }
+
+/* Solve button */
+.solveBtn {
+  align-self: flex-start;
+  padding: 11px 28px; font-size: 14px; font-weight: 600;
+  background: var(--teal); color: #fff;
+  border: none; border-radius: var(--radius-md);
+  cursor: pointer; transition: background .15s, transform .1s;
+}
+.solveBtn:hover { background: var(--teal-60); }
+.solveBtn:active { transform: scale(.98); }
+
+/* Impossible box */
+.impossibleBox {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--danger-20); border: 1px solid #FCA5A5;
+  border-radius: var(--radius-md); padding: 1rem 1.25rem;
+  font-size: 13px; color: #7F1D1D; line-height: 1.5;
+}
+.impossibleIcon { font-size: 20px; flex-shrink: 0; }
+.impossibleBox strong { color: #450a0a; }
+.impossibleBox p { margin-top: 4px; color: #991B1B; }
+
+/* Result cards */
+.resultGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 10px;
+}
+.resultCard {
+  border-radius: var(--radius-md);
+  padding: .85rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+.tone_good { background: rgba(29,158,117,.1); border-color: rgba(29,158,117,.3); }
+.tone_warn { background: rgba(245,166,35,.1); border-color: rgba(245,166,35,.3); }
+.tone_neutral { background: var(--bg-elevated); border-color: var(--border); }
+
+.rcLabel { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-bottom: 5px; }
+.rcValue { font-size: 18px; font-weight: 600; color: var(--text-primary); font-family: var(--font-mono); line-height: 1.2; }
+.rcBig   { font-size: 22px; }
+.tone_good .rcValue { color: var(--teal-60); }
+.tone_warn .rcValue { color: #92400E; }
+.rcSub  { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+
+/* Path assessment */
+.pathBox {
+  display: flex; align-items: flex-start; gap: 12px;
+  border-radius: var(--radius-md); padding: 1rem 1.25rem;
+  font-size: 13px; line-height: 1.55;
+}
+.pathGood { background: rgba(29,158,117,.1); border: 1px solid rgba(29,158,117,.3); color: var(--teal); }
+.pathBad  { background: rgba(245,166,35,.1); border: 1px solid rgba(245,166,35,.3); color: var(--amber); }
+.pathIcon { font-size: 16px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.pathGood .pathIcon { color: var(--teal-60); }
+.pathBad  .pathIcon { color: #B45309; }
+.pathBox strong { font-weight: 600; }
+
+/* Chart */
+.chartSection {}
+.chartTitle { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+.chartLegend { display: flex; gap: 16px; margin-bottom: 6px; font-size: 12px; color: var(--text-secondary); }
+.chartLegend span { display: flex; align-items: center; gap: 5px; }
+.legendDot  { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.legendDash { width: 18px; height: 2px; background: var(--amber); display: inline-block; border-radius: 1px; }
+
+/* Actions */
+.actionsBox {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 1rem 1.25rem;
+}
+.actionsTitle { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: .75rem; }
+.actionsList { display: flex; flex-direction: column; gap: .75rem; }
+.action { display: flex; gap: 12px; align-items: flex-start; }
+.actionNum {
+  width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+  background: var(--navy); color: #fff;
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.action strong { font-size: 13px; color: var(--text-primary); display: block; margin-bottom: 2px; }
+.action p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+
+.tooltip {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 8px 12px;
+  box-shadow: var(--shadow-md); min-width: 160px;
+}
+.tipAge { font-size: 11px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; }
+.tipRow { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; font-weight: 500; padding: 1px 0; }
+
+
+/* Sync notice */
+.syncNotice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: .6rem .85rem;
+  flex-wrap: wrap;
+}
+.syncDot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0;
+}
+.resetOverridesBtn {
+  margin-left: auto;
+  font-size: 11px; font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.resetOverridesBtn:hover { background: var(--bg-elevated); color: var(--text-primary); }
+
+/* Synced field highlight */
+.goalSynced { border-color: rgba(29,158,117,0.25) !important; background: rgba(29,158,117,.06) !important; }
+
+.syncBadge {
+  display: inline-block;
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: var(--teal-60);
+  background: var(--teal-20);
+  border-radius: 20px;
+  padding: 1px 6px;
+  margin-bottom: 4px;
+}
+
+/* inputRow: stepper + optional sync reset btn */
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.inputRow .stepWrap { flex: 1; }
+
+.syncBtn {
+  flex-shrink: 0;
+  width: 26px; height: 34px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .12s;
+}
+.syncBtn:hover { color: var(--teal-60); border-color: var(--teal); background: var(--teal-20); }
+
+@media (max-width: 900px) {
+  .goalGrid   { grid-template-columns: 1fr 1fr; }
+  .resultGrid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .goalGrid   { grid-template-columns: 1fr; }
+  .resultGrid { grid-template-columns: 1fr; }
+}

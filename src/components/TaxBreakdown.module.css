@@ -1,0 +1,242 @@
+.wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: .85rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.incomeControl {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 380px;
+}
+
+.incomeLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.incomeLabel strong {
+  color: var(--text-primary);
+}
+
+.incomeSlider {
+  flex: 1;
+  accent-color: var(--teal);
+}
+
+.tableWrap { overflow-x: auto; }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 580px;
+}
+
+.table thead th {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.table tbody td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr:hover td { background: var(--bg-elevated); }
+
+.currentRow td { background: rgba(29,158,117,.1) !important; }
+
+.provCode {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-primary);
+  margin-right: 6px;
+  font-family: var(--font-mono);
+}
+
+.provName {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.currentBadge {
+  margin-left: 6px;
+  font-size: 10px;
+  padding: 1px 6px;
+  background: var(--teal-20);
+  color: var(--teal-60);
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+
+.good { color: var(--teal-60); font-weight: 600; }
+
+.taxBarTrack {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-elevated);
+  overflow: hidden;
+}
+
+.taxBarFill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--gray-20);
+  transition: width .3s ease;
+}
+
+.taxBarCurrent { background: var(--teal); }
+
+.note {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: .65rem 1.1rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+
+.syncIncomeBtn {
+  font-size: 11px; font-weight: 600; padding: 4px 10px;
+  border-radius: var(--radius-sm); border: 1px solid var(--teal-40);
+  background: var(--teal-20); color: var(--teal-60); cursor: pointer;
+  white-space: nowrap;
+}
+.syncIncomeBtn:hover { background: var(--teal-40); }
+
+/* ── Tabs ─────────────────────────────────────────────────────────── */
+.tabs {
+  display: flex; gap: 3px; padding: 3px;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius-md); width: fit-content; margin-bottom: 1rem;
+}
+.tab {
+  font-size: 12.5px; font-weight: 500; padding: 6px 14px;
+  border: none; border-radius: var(--radius-sm);
+  background: transparent; color: var(--text-muted);
+  cursor: pointer; transition: all .12s;
+}
+.tab:hover { color: var(--text-secondary); }
+.tabActive {
+  background: var(--bg-card); color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,.18);
+}
+
+/* ── Supplement subtitle ──────────────────────────────────────────── */
+.suppSubtitle {
+  font-size: 12px; color: var(--text-muted); margin-top: 4px; line-height: 1.5;
+}
+
+/* ── Supplement cards grid ────────────────────────────────────────── */
+.suppGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.suppCard {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: .85rem;
+  display: flex; flex-direction: column; gap: 5px;
+  transition: border-color .15s;
+}
+.suppCardCurrent {
+  border-color: rgba(29,158,117,.4);
+  background: rgba(29,158,117,.06);
+}
+.suppCardNone { opacity: .55; }
+
+.suppCardTop {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
+}
+.suppProvince { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.suppProvName { font-size: 11px; color: var(--text-muted); }
+
+.suppAmount { display: flex; align-items: baseline; gap: 2px; }
+.suppAmountVal {
+  font-size: 16px; font-weight: 800; font-family: var(--font-mono); color: var(--teal);
+}
+.suppAmountLabel { font-size: 10px; color: var(--text-muted); }
+.suppNone { font-size: 11px; color: var(--text-muted); font-style: italic; }
+
+.suppName { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.suppNote { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+.suppBarTrack {
+  height: 3px; background: var(--border); border-radius: 2px; margin-top: 4px;
+}
+.suppBarFill { height: 100%; border-radius: 2px; transition: width .4s ease; }
+
+/* ── QPP / Notes ──────────────────────────────────────────────────── */
+.qppNote {
+  background: rgba(55,138,221,.1); border: 1px solid rgba(55,138,221,.25);
+  border-radius: var(--radius-md); padding: .75rem 1rem;
+  font-size: 12px; color: var(--text-secondary); line-height: 1.6;
+  margin-top: .5rem;
+}
+
+.qppBox {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 1rem;
+  display: flex; flex-direction: column; gap: .6rem;
+}
+.qppBoxTitle { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+.qppBoxText { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+
+.qppGrid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 3px 0; font-size: 11.5px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden;
+}
+.qppCell {
+  padding: 5px 10px; color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+.qppCell:nth-child(3n+1) { color: var(--text-muted); font-size: 10.5px; }
+.qppHighlight { color: var(--teal) !important; font-weight: 600; }
+.qppGrid > div:nth-last-child(-n+3) { border-bottom: none; }
+
+.currentBadge {
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  background: rgba(29,158,117,.2); color: var(--teal);
+  padding: 1px 5px; border-radius: 3px;
+}

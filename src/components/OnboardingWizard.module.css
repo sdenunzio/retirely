@@ -1,0 +1,411 @@
+/* ─── Mode picker ─────────────────────────────────────────────────── */
+.modeBackdrop {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #0D1B2A 0%, #0F2E3F 60%, #0D1B2A 100%);
+  z-index: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modeCard {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  max-width: 560px;
+  width: 100%;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.modeLogo { font-size: 48px; margin-bottom: .75rem; }
+
+.modeTitle {
+  font-size: 26px; font-weight: 700; color: #fff;
+  letter-spacing: -.02em; margin-bottom: .5rem;
+}
+
+.modeSub {
+  font-size: 14px; color: rgba(255,255,255,.5);
+  line-height: 1.6; margin-bottom: 1.75rem;
+}
+
+.modeOptions { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.25rem; }
+
+.modeBtn {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 1.1rem 1.25rem; border-radius: 14px;
+  border: 1.5px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  cursor: pointer; text-align: left; transition: all .15s;
+  width: 100%;
+}
+.modeBtn:hover { border-color: rgba(255,255,255,.28); background: rgba(255,255,255,.1); }
+
+/* Kill 300ms tap delay on all interactive elements */
+.modeBtn, .toggleCard, .backBtn, .nextBtn, .calcBtn, .skipAllBtn, .stepBtn, .provinceSelect {
+  touch-action: manipulation;
+}
+
+.modeBtnGuided { border-color: rgba(29,158,117,.4) !important; background: rgba(29,158,117,.12) !important; }
+.modeBtnGuided:hover { border-color: rgba(29,158,117,.7) !important; background: rgba(29,158,117,.2) !important; }
+
+.modeBtnIcon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+
+.modeBtnTitle { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.modeBtnDesc  { font-size: 12.5px; color: rgba(255,255,255,.5); line-height: 1.5; }
+
+.modeNote { font-size: 11px; color: rgba(255,255,255,.28); }
+
+/* ─── Wizard panel ────────────────────────────────────────────────── */
+.wizardBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,20,35,.65);
+  backdrop-filter: blur(4px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  padding: env(safe-area-inset-top, 1rem) 1rem env(safe-area-inset-bottom, 1rem);
+}
+
+.wizardPanel {
+  background: var(--bg-card);
+  border-radius: 18px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.3);
+  width: 100%;
+  max-width: 540px;
+  /* Fixed height on desktop — nav bar never moves between steps */
+  height: 82vh;
+  height: 82dvh;
+  max-height: 640px;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Progress bar */
+.progressBar {
+  height: 3px;
+  background: var(--bg-elevated);
+  flex-shrink: 0;
+}
+.progressFill {
+  height: 100%;
+  background: var(--teal);
+  border-radius: 0 2px 2px 0;
+  transition: width .3s ease;
+}
+
+/* Header */
+.wizardHeader {
+  display: flex; align-items: center; gap: 10px;
+  padding: 1rem 1.25rem .75rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.stepCounter {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--teal-60);
+  white-space: nowrap;
+}
+.stepTitle {
+  font-size: 16px; font-weight: 700; color: var(--text-primary);
+  flex: 1; display: flex; align-items: center; gap: 7px;
+}
+.stepEmoji { font-size: 18px; }
+.skipAllBtn {
+  font-size: 11px; color: var(--text-muted); background: none; border: none;
+  cursor: pointer; white-space: nowrap; padding: 0;
+  text-decoration: underline; flex-shrink: 0;
+}
+.skipAllBtn:hover { color: var(--text-secondary); }
+
+/* Body */
+.wizardBody {
+  flex: 1; overflow-y: auto; padding: 1.1rem 1.25rem;
+}
+
+.stepContent { display: flex; flex-direction: column; gap: .9rem; }
+.stepIntro { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+/* Fields */
+.wField { display: flex; flex-direction: column; gap: 4px; }
+.wLabel { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.wHint  { font-size: 11.5px; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+/* Province select */
+.provinceSelect {
+  width: 100%; padding: 9px 12px; font-size: 14px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-md);
+  background: var(--bg-card); color: var(--text-primary); cursor: pointer;
+}
+.provinceSelect:focus { outline: none; border-color: var(--teal); }
+
+/* Stepper */
+.stepper {
+  display: flex; align-items: center; gap: 0;
+  border: 1.5px solid var(--border); border-radius: var(--radius-md);
+  overflow: hidden; background: var(--bg-card); height: 40px; max-width: 240px;
+}
+.stepBtn {
+  width: 36px; flex-shrink: 0;
+  background: var(--bg-elevated); border: none; color: var(--text-secondary);
+  font-size: 18px; cursor: pointer; height: 100%;
+  transition: all .1s; display: flex; align-items: center; justify-content: center;
+}
+.stepBtn:hover { background: var(--bg-elevated); color: var(--text-primary); }
+.stepInput {
+  flex: 1; border: none; text-align: center;
+  font-size: 16px; font-weight: 700; font-family: var(--font-mono);
+  color: var(--text-primary); outline: none; min-width: 0;
+}
+/* Hide spinners */
+.stepInput::-webkit-outer-spin-button,
+.stepInput::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.stepInput[type=number] { -moz-appearance: textfield; }
+
+.stepUnit {
+  font-size: 13px; color: var(--text-muted); padding: 0 6px; flex-shrink: 0;
+}
+
+/* Toggle cards */
+.coupleChoice { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.toggleCard {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: .8rem .9rem; border: 1.5px solid var(--border);
+  border-radius: var(--radius-md); background: var(--bg-elevated);
+  cursor: pointer; text-align: left; transition: all .13s; width: 100%;
+}
+.toggleCard:hover { border-color: var(--border); background: var(--bg-card); }
+.toggleCardOn { border-color: var(--teal) !important; background: rgba(29,158,117,.12) !important; }
+.toggleCardIcon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.toggleCardTitle { font-size: 12.5px; font-weight: 700; color: var(--text-primary); }
+.toggleCardDesc  { font-size: 11px; color: var(--text-secondary); line-height: 1.4; margin-top: 1px; }
+.toggleCardCheck { font-size: 13px; color: var(--teal-60); font-weight: 700; margin-left: auto; flex-shrink: 0; }
+
+/* Slider */
+.sliderRow { display: flex; align-items: center; gap: 10px; }
+.slider { flex: 1; accent-color: var(--teal); cursor: pointer; }
+.sliderVal { font-size: 14px; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); min-width: 36px; }
+
+/* Calc note */
+.calcNote {
+  font-size: 12px; color: var(--text-secondary);
+  background: var(--bg-elevated); border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  padding: 7px 10px; line-height: 1.5;
+}
+.calcNote strong { color: var(--text-primary); }
+.calcNoteGood { background: rgba(29,158,117,.12); border-color: rgba(29,158,117,.3); color: var(--teal); }
+.calcNoteGood strong { color: var(--teal); }
+.calcNoteWarn { background: rgba(245,166,35,.1); border-color: rgba(245,166,35,.3); color: var(--amber); }
+.calcNoteWarn strong { color: var(--amber); }
+
+/* Two-col fields (partner step) */
+.twoColFields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+
+/* Review grid */
+.reviewGrid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6px; margin-bottom: .75rem;
+}
+.reviewItem {
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 8px 10px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.reviewLabel { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); font-weight: 600; }
+.reviewVal   { font-size: 14px; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); }
+.reviewNote  { font-size: 11.5px; color: var(--text-secondary); line-height: 1.55; }
+
+/* Navigation */
+.wizardNav {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: .85rem 1.25rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated);
+  flex-shrink: 0;
+}
+
+.backBtn {
+  font-size: 13px; padding: 10px 18px;
+  border-radius: var(--radius-md); border: 1px solid var(--border);
+  background: var(--bg-card); color: var(--text-secondary); cursor: pointer;
+  transition: all .12s; touch-action: manipulation; min-height: 44px;
+}
+.backBtn:disabled { opacity: .35; cursor: not-allowed; }
+.backBtn:not(:disabled):hover { background: var(--bg-elevated); color: var(--text-primary); }
+
+.nextBtn, .calcBtn {
+  font-size: 13px; font-weight: 600; padding: 10px 22px;
+  border-radius: var(--radius-md); border: none; cursor: pointer;
+  transition: all .12s; touch-action: manipulation; min-height: 44px;
+}
+.nextBtn { background: var(--gray-80); color: #fff; }
+.nextBtn:hover { background: var(--navy); }
+.calcBtn { background: var(--teal); color: #fff; }
+.calcBtn:hover { background: var(--teal-60); }
+
+/* Step dots */
+.dots { display: flex; align-items: center; gap: 5px; flex: 1; justify-content: center; }
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gray-20); transition: all .2s;
+}
+.dotActive { background: var(--navy); width: 18px; border-radius: 3px; }
+.dotDone { background: var(--teal); }
+
+/* Responsive — mobile */
+@media (max-width: 560px) {
+  .coupleChoice { grid-template-columns: 1fr; }
+  .twoColFields { grid-template-columns: 1fr; }
+  .reviewGrid   { grid-template-columns: 1fr; }
+
+  /* Full-screen panel on mobile — no rounding, no gap */
+  .wizardBackdrop { padding: 0; align-items: flex-end; }
+  .wizardPanel {
+    height: auto;       /* override desktop fixed height on mobile */
+    min-height: unset;
+    max-height: 92vh;
+    max-height: 92dvh;
+    border-radius: 18px 18px 0 0;
+    width: 100%;
+  }
+
+  /* Tighter header on mobile */
+  .wizardHeader { padding: .75rem 1rem .6rem; }
+  .stepTitle    { font-size: 14px; }
+  .skipAllBtn   { display: none; }  /* remove clutter on mobile */
+
+  /* More breathing room in body */
+  .wizardBody { padding: .9rem 1rem; }
+
+  /* Bigger nav area on mobile — easy to tap */
+  .wizardNav { padding: .75rem 1rem; gap: 8px; }
+  .backBtn  { padding: 12px 16px; font-size: 14px; }
+  .nextBtn, .calcBtn { padding: 12px 20px; font-size: 14px; flex: 1; }
+
+  /* Mode picker */
+  .modeBackdrop { align-items: flex-end; padding: 0; }
+  .modeCard {
+    padding: 1.75rem 1.25rem 2rem;
+    border-radius: 20px 20px 0 0;
+    max-width: 100%;
+  }
+  .modeTitle { font-size: 22px; }
+  .modeSub   { font-size: 13px; margin-bottom: 1.25rem; }
+  .modeBtn   { padding: .9rem 1rem; }
+  .modeBtnTitle { font-size: 14px; }
+  .modeBtnDesc  { font-size: 12px; }
+
+  /* Dots — hide on very small screens to save space */
+  .dots { display: none; }
+}
+
+/* ── T&C acknowledgment box ──────────────────────────── */
+.tcBox {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius-md);
+  padding: .85rem 1rem;
+  margin: .5rem 0 .25rem;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.tcLabel {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 12.5px; color: rgba(255,255,255,.7);
+  line-height: 1.55; cursor: pointer;
+}
+.tcLabel strong { color: #fff; }
+.tcCheck {
+  width: 16px; height: 16px; flex-shrink: 0;
+  margin-top: 2px; accent-color: var(--teal);
+  cursor: pointer;
+}
+.tcLink {
+  font-size: 11px; color: var(--teal);
+  background: none; border: none; padding: 0;
+  cursor: pointer; text-align: left;
+  text-decoration: underline; opacity: .8;
+}
+.tcLink:hover { opacity: 1; }
+
+/* Disabled state for mode buttons before agreement */
+.modeBtnDisabled {
+  opacity: .4 !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+/* ── Terms modal ─────────────────────────────────────── */
+.termsBackdrop {
+  position: fixed; inset: 0; z-index: 700;
+  background: rgba(5,12,22,.85); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+}
+.termsModal {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
+  width: 100%; max-width: 620px;
+  max-height: calc(100vh - 32px);
+  display: flex; flex-direction: column;
+  animation: fadeUp .18s ease;
+}
+.termsHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.25rem .85rem;
+  border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.termsTitle {
+  font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0;
+}
+.termsClose {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text-muted); cursor: pointer; font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .12s;
+}
+.termsClose:hover { background: var(--bg-elevated); color: var(--text-primary); }
+
+.termsBody {
+  flex: 1; overflow-y: auto; padding: 1rem 1.25rem;
+  overscroll-behavior: contain;
+}
+.termsUpdated {
+  font-size: 11px; color: var(--text-muted); margin: 0 0 1rem;
+}
+.termsH3 {
+  font-size: 13px; font-weight: 700; color: var(--text-primary);
+  margin: 1.25rem 0 .4rem;
+}
+.termsH3:first-of-type { margin-top: 0; }
+.termsBody p {
+  font-size: 12.5px; color: var(--text-secondary);
+  line-height: 1.65; margin: 0 0 .65rem;
+}
+.termsBody p strong { color: var(--text-primary); }
+
+.termsFooter {
+  padding: .75rem 1.25rem; border-top: 1px solid var(--border);
+  background: var(--bg-elevated); flex-shrink: 0; text-align: right;
+}
+.termsCloseBtn {
+  font-size: 13px; font-weight: 600; padding: 8px 22px;
+  border: none; border-radius: var(--radius-sm);
+  background: var(--teal); color: #fff; cursor: pointer;
+  transition: all .12s;
+}
+.termsCloseBtn:hover { background: var(--teal-dim); }
+
+@media (max-width: 560px) {
+  .tcLabel { font-size: 12px; }
+}

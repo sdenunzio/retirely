@@ -1,0 +1,32 @@
+/* Live ad wrapper */
+.wrap {
+  width: 100%;
+  overflow: hidden;
+  margin: .75rem 0;
+}
+
+/* Right rail panel — sticky 300px column */
+.rightPanel {
+  width: 300px;
+  flex-shrink: 0;
+  padding: 1.25rem .75rem;
+  position: sticky;
+  top: 60px; /* below the 60px TopBar */
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.rightLabel {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--gray-20);
+  align-self: flex-start;
+}
+
+@media (max-width: 1200px) {
+  .rightPanel { display: none; }
+}

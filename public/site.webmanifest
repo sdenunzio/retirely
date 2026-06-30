@@ -1,0 +1,26 @@
+{
+  "name": "Retirely — Canadian Retirement Calculator",
+  "short_name": "Retirely",
+  "description": "Free Canadian retirement scenario calculator. Model RRSP, TFSA, CPP and OAS side by side.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D1B2A",
+  "theme_color": "#0D1B2A",
+  "lang": "en-CA",
+  "categories": ["finance", "productivity"],
+  "icons": [
+    { "src": "/favicon.ico",    "sizes": "48x48",   "type": "image/x-icon" },
+    { "src": "/favicon.svg",    "sizes": "any",      "type": "image/svg+xml", "purpose": "maskable any" },
+    { "src": "/logo.png",       "sizes": "512x512",  "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Retirely retirement scenario dashboard"
+    }
+  ]
+}

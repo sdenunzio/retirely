@@ -1,0 +1,182 @@
+<!doctype html>
+<!--
+  Retirely — Canadian Retirement Scenario Calculator
+  Copyright © 2024–2026 Retirely (retirely.ca). All rights reserved.
+-->
+<html lang="en-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ── Primary SEO ─────────────────────────────────────────── -->
+    <title>Retirely — Free Canadian Retirement Calculator | RRSP, TFSA, CPP, OAS, RRIF Planning</title>
+    <meta name="description" content="Free Canadian retirement calculator — no sign-up required. Model RRSP, TFSA, RRIF, CPP, OAS and DB pension scenarios side by side. Compare when to take CPP, estimate retirement tax, run Monte Carlo simulations, and plan couples income splitting. All 10 provinces supported." />
+    <meta name="keywords" content="Canadian retirement calculator, free retirement calculator Canada, retirement calculator no signup, RRSP calculator, TFSA calculator, CPP calculator, OAS calculator, RRIF minimum withdrawal calculator, RRIF calculator Canada, retirement planning Canada, retirement income splitting Canada, when to take CPP, CPP deferral calculator, DB pension retirement planning, LIRA LIF calculator Canada, GIS calculator Canada, retirement tax calculator Canada, retirement scenarios Canada, couples retirement planning Canada, early retirement Canada, FIRE calculator Canada, FIRE number Canada, Ontario retirement calculator, BC retirement calculator, Alberta retirement calculator, retirement spending calculator Canada" />
+    <meta name="author" content="Retirely" />
+    <meta name="copyright" content="© 2026 Retirely (retirely.ca). All rights reserved." />
+    <link rel="canonical" href="https://retirely.ca/" />
+
+    <!-- ── Robots ──────────────────────────────────────────────── -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+
+    <!-- ── Open Graph (Facebook / LinkedIn) ───────────────────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Retirely" />
+    <meta property="og:url" content="https://retirely.ca/" />
+    <meta property="og:title" content="Retirely — Free Canadian Retirement Calculator | RRSP, TFSA, CPP & OAS" />
+    <meta property="og:description" content="Model RRSP, TFSA, CPP, OAS and RRIF scenarios side by side. Compare CPP timing, estimate retirement tax, plan income splitting. Free, Canadian, no sign-up required." />
+    <meta property="og:image" content="https://retirely.ca/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Retirely retirement scenario calculator showing RRSP, TFSA and CPP projections" />
+    <meta property="og:locale" content="en_CA" />
+
+    <!-- ── Twitter / X Card ───────────────────────────────────── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Retirely — Free Canadian Retirement Calculator | RRSP, TFSA, CPP & OAS" />
+    <meta name="twitter:description" content="Model RRSP, TFSA, CPP, OAS and RRIF scenarios side by side. Compare CPP timing, estimate retirement tax, plan income splitting. Free, Canadian, no sign-up required." />
+    <meta name="twitter:image" content="https://retirely.ca/og-image.png" />
+    <meta name="twitter:image:alt" content="Retirely retirement scenario calculator" />
+
+    <!-- ── Favicons & PWA ─────────────────────────────────────── -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0D1B2A" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Retirely" />
+
+    <!-- ── Performance hints ──────────────────────────────────── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- ── Structured data (JSON-LD) ──────────────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://retirely.ca/#app",
+          "name": "Retirely",
+          "url": "https://retirely.ca/",
+          "description": "Free Canadian retirement scenario calculator. Model RRSP, TFSA, CPP, OAS, DB pension and tax across multiple strategies side by side.",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Any",
+          "browserRequirements": "Requires JavaScript",
+          "isAccessibleForFree": true,
+          "inLanguage": "en-CA",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CAD"
+          },
+          "featureList": [
+            "RRSP and RRIF drawdown modelling",
+            "TFSA growth and withdrawal planning",
+            "CPP and OAS benefit comparison across start ages",
+            "Defined benefit pension modelling",
+            "Canadian federal and provincial tax estimation",
+            "Pension income splitting optimisation",
+            "Income equalisation for couples",
+            "Monte Carlo simulation",
+            "FIRE number calculator",
+            "Commercial property investment analysis",
+            "Retirement budget planner"
+          ],
+          "areaServed": {
+            "@type": "Country",
+            "name": "Canada"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Retirely",
+            "url": "https://retirely.ca/"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://retirely.ca/#website",
+          "url": "https://retirely.ca/",
+          "name": "Retirely",
+          "description": "Free Canadian retirement scenario calculator",
+          "inLanguage": "en-CA",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://retirely.ca/"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Is Retirely free to use?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Retirely is completely free with no sign-up required. It is a Canadian retirement scenario tool, not financial advice."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What Canadian accounts does Retirely model?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Retirely models RRSP, TFSA, and non-registered accounts, plus CPP, OAS, GIS, defined benefit pensions, and provincial retirement supplements across all 10 provinces."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Retirely support couples?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Retirely has a full couple mode with pension income splitting, income equalisation optimisation, and separate account tracking for both partners."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which provinces does Retirely support?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Retirely supports all 10 Canadian provinces with province-specific tax brackets for 2025, including Ontario, British Columbia, Alberta, Quebec, Saskatchewan, Manitoba, Nova Scotia, New Brunswick, Prince Edward Island, and Newfoundland."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When should I take CPP?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Retirely lets you compare CPP starting at 60, 65, or 70 side by side. Taking CPP at 60 reduces it by 36% permanently. Deferring to 70 increases it by 42%. The breakeven vs. starting at 65 is typically around age 74–76 for deferral to 70. Your optimal age depends on your health, other income sources, and RRSP balance."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the RRIF minimum withdrawal?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Your RRSP must convert to a RRIF by age 71. Minimum withdrawals start at 5.28% of the balance at age 71 and rise to 20% by age 95. Retirely models mandatory RRIF minimums automatically and shows how they affect your taxable income and portfolio in each scenario."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does pension income splitting work in Canada?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Canadian couples can split up to 50% of eligible pension income (RRIF withdrawals at 65+, DB pension, annuity income) with a lower-income spouse to reduce combined household tax. Retirely automatically optimises the pension income split each year to minimise your total tax bill."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

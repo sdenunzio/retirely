@@ -1,0 +1,98 @@
+.wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Trigger button */
+.trigger {
+  display: flex; align-items: center; gap: 5px;
+  padding: 0 9px 0 7px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.55);
+  cursor: pointer; transition: all .13s;
+  flex-shrink: 0;
+}
+.trigger:hover, .triggerOpen {
+  background: rgba(255,255,255,.13);
+  border-color: rgba(255,255,255,.22);
+  color: #fff;
+}
+.triggerLabel {
+  font-size: 11.5px; font-weight: 600;
+  letter-spacing: .01em;
+}
+.chevron {
+  opacity: .6;
+  transition: transform .15s;
+}
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 220px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0,0,0,.45);
+  z-index: 200;
+  overflow: hidden;
+  animation: fadeDown .15s ease;
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropHeader {
+  font-size: 9.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--text-muted);
+  padding: .6rem .9rem .4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* App items */
+.appItem {
+  display: flex; align-items: center; gap: 10px;
+  padding: .65rem .9rem;
+  text-decoration: none;
+  transition: background .1s;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.appItem:last-child { border-bottom: none; }
+.appItem:hover { background: var(--bg-elevated); }
+.appItemActive { background: rgba(29,207,176,.07); }
+.appItemActive:hover { background: rgba(29,207,176,.11); }
+
+.appIcon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  padding: 5px;
+}
+.appIconActive {
+  background: rgba(29,207,176,.15);
+  border-color: rgba(29,207,176,.35);
+  color: var(--teal);
+}
+
+.appInfo { flex: 1; min-width: 0; }
+.appLabel { font-size: 12.5px; font-weight: 600; color: var(--text-primary); }
+.appSub   { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; }
+
+.activeDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--teal); flex-shrink: 0;
+}

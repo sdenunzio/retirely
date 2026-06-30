@@ -1,0 +1,470 @@
+/* ─── Panel shell ────────────────────────────────────────────────── */
+.panel {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  height: calc(100vh - 60px);
+  background: var(--navy);
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panelInner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: .75rem .85rem .6rem;
+  gap: 0;
+}
+
+/* ─── Sidebar tab bar ────────────────────────────────────────────── */
+.sidebarTabs {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius-md);
+  margin-bottom: .75rem;
+  flex-shrink: 0;
+}
+
+.sidebarTab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 4px;
+  border: none;
+  border-radius: calc(var(--radius-md) - 3px);
+  background: transparent;
+  color: rgba(255,255,255,.4);
+  cursor: pointer;
+  transition: all .12s;
+  white-space: nowrap;
+  position: relative;
+}
+.sidebarTab:hover { color: rgba(255,255,255,.7); background: rgba(255,255,255,.05); }
+.sidebarTabActive {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+
+/* DB active badge on Income tab */
+.dbBadge {
+  font-size: 7.5px; font-weight: 800; letter-spacing: .05em;
+  padding: 1px 4px; border-radius: 3px;
+  background: rgba(29,207,176,.3); color: var(--teal);
+  margin-left: 1px;
+}
+
+/* ─── Tab content ────────────────────────────────────────────────── */
+.tabContent {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-right: 2px;
+}
+
+/* ─── Section heads ──────────────────────────────────────────────── */
+.sectionHead {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.28);
+  margin: .7rem 0 .45rem;
+  padding-bottom: .3rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.sectionHead:first-child { margin-top: 0; }
+
+/* ─── Fields ─────────────────────────────────────────────────────── */
+.field { margin-bottom: .45rem; }
+.label {
+  display: block;
+  font-size: 10.5px;
+  color: rgba(255,255,255,.45);
+  margin-bottom: 3px;
+  font-weight: 400;
+}
+.labelSub { font-size: 9.5px; color: rgba(255,255,255,.25); }
+
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: .1rem; }
+
+/* ─── Total display ──────────────────────────────────────────────── */
+.totalToday {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--teal-40);
+  margin-bottom: .5rem;
+  font-family: var(--font-mono);
+  letter-spacing: -.02em;
+}
+
+.combinedTotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem .6rem;
+  background: rgba(29,158,117,.1);
+  border: 1px solid rgba(29,158,117,.2);
+  border-radius: var(--radius-sm);
+  margin-top: .4rem;
+  font-size: 11.5px;
+  color: rgba(255,255,255,.5);
+}
+.combinedTotal strong {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--teal-40);
+}
+
+/* ─── Sliders ────────────────────────────────────────────────────── */
+.sliderRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.slider {
+  flex: 1;
+  accent-color: var(--teal);
+  cursor: pointer;
+}
+
+/* ─── Province select ────────────────────────────────────────────── */
+.provinceSelect {
+  width: 100%;
+  font-size: 12.5px;
+  padding: 6px 10px;
+  background: rgba(255,255,255,.07);
+  border: 1.5px solid rgba(255,255,255,.13);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.provinceSelect option { background: var(--navy-80); color: #fff; }
+.provinceSelect:focus { outline: none; border-color: var(--teal-40); }
+
+/* ─── Couple row ─────────────────────────────────────────────────── */
+.coupleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .45rem .6rem;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius-sm);
+  margin-bottom: .5rem;
+}
+.coupleLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: rgba(255,255,255,.55);
+  font-weight: 500;
+}
+
+/* ─── Toggle (on/off pill) ───────────────────────────────────────── */
+.toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 3px 3px 24px;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 20px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.35);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s;
+  min-width: 44px;
+}
+.toggle:hover { border-color: rgba(255,255,255,.25); }
+.toggleOn {
+  background: rgba(29,207,176,.2) !important;
+  border-color: rgba(29,207,176,.5) !important;
+  color: var(--teal) !important;
+}
+.toggleThumb {
+  position: absolute;
+  left: 3px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  transition: all .15s;
+}
+.toggleOn .toggleThumb {
+  left: calc(100% - 19px);
+  background: var(--teal);
+}
+.toggleLabel { padding-right: 3px; white-space: nowrap; }
+
+/* ─── Savings rate bar ───────────────────────────────────────────── */
+.savingsRate {
+  display: flex; align-items: center; gap: 6px;
+  margin: -1px 0 .4rem;
+}
+.savingsRateBar {
+  flex: 1; height: 3px;
+  background: rgba(255,255,255,.1);
+  border-radius: 2px; overflow: hidden;
+}
+.savingsRateFill {
+  height: 100%; border-radius: 2px;
+  background: var(--teal); transition: width .3s ease;
+}
+.savingsRateLabel { font-size: 10px; color: rgba(255,255,255,.4); white-space: nowrap; }
+.savingsRateHint { color: rgba(255,180,0,.7); }
+.savingsRateGood { color: var(--teal-40); }
+
+/* ─── Income hint ────────────────────────────────────────────────── */
+.incomeHint {
+  font-size: 10px;
+  color: rgba(255,255,255,.3);
+  line-height: 1.5;
+  margin: -2px 0 .5rem;
+  padding: 3px 6px;
+  border-left: 2px solid rgba(255,255,255,.1);
+}
+
+/* ─── DB Pension section ─────────────────────────────────────────── */
+.dbSection {
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius-md);
+  margin: .4rem 0;
+  overflow: hidden;
+  transition: border-color .15s;
+}
+.dbSectionOn { border-color: rgba(29,207,176,.35); }
+
+.dbHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem .65rem;
+  background: rgba(255,255,255,.04);
+}
+.dbTitle {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700;
+  color: rgba(255,255,255,.5);
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.dbSectionOn .dbTitle { color: var(--teal-40); }
+
+.dbFields {
+  padding: .55rem .65rem .6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+/* Pill group (indexing selector) */
+.pillGroup {
+  display: flex;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.pill {
+  flex: 1;
+  font-size: 11px; font-weight: 500;
+  padding: 5px 4px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,.35);
+  cursor: pointer;
+  transition: all .12s;
+  text-align: center;
+}
+.pill + .pill { border-left: 1px solid rgba(255,255,255,.1); }
+.pill:hover { color: rgba(255,255,255,.6); background: rgba(255,255,255,.05); }
+.pillOn {
+  background: rgba(29,207,176,.2) !important;
+  color: var(--teal) !important;
+}
+
+.dbNote {
+  font-size: 9.5px;
+  color: rgba(255,255,255,.28);
+  line-height: 1.5;
+  margin-top: .35rem;
+  font-style: italic;
+}
+
+/* ─── Panel footer (reset + calculate) ──────────────────────────── */
+.panelFooter {
+  display: flex;
+  gap: 8px;
+  padding-top: .65rem;
+  border-top: 1px solid rgba(255,255,255,.08);
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.resetBtn {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 500;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.4);
+  cursor: pointer; transition: all .12s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.resetBtn:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.75); }
+
+.calcBtn {
+  flex: 1;
+  padding: 10px;
+  background: var(--teal);
+  color: #fff;
+  font-size: 13.5px; font-weight: 700;
+  border: none; border-radius: var(--radius-sm);
+  cursor: pointer; transition: background .15s, transform .1s;
+  letter-spacing: -.01em;
+}
+.calcBtn:hover { background: var(--teal-dim); }
+.calcBtn:active { transform: scale(0.98); }
+
+/* ─── Mobile ─────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .panel { width: 100%; min-width: 0; height: auto; position: static; overflow-y: visible; }
+  .panelInner { padding: .85rem; }
+  .row2 { grid-template-columns: 1fr 1fr; }
+}
+
+/* Spending row with budget button */
+.spendingRow {
+  display: flex; align-items: flex-end; gap: 6px;
+}
+.spendingInput { flex: 1; min-width: 0; }
+
+.budgetBtn {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 10.5px; font-weight: 700;
+  padding: 0 8px;
+  height: 32px;
+  border: 1px solid rgba(29,207,176,.35);
+  border-radius: var(--radius-sm);
+  background: rgba(29,207,176,.1);
+  color: var(--teal);
+  cursor: pointer; transition: all .12s;
+  white-space: nowrap; flex-shrink: 0;
+  letter-spacing: .02em;
+}
+.budgetBtn:hover { background: rgba(29,207,176,.2); border-color: var(--teal); }
+
+.budgetActive {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; color: var(--teal-40);
+  padding: 2px 4px;
+  margin-top: -2px;
+}
+
+/* Other income row */
+.otherIncomeRow {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: .3rem;
+}
+.otherIncomeInput { width: 100%; }
+
+.taxableBtn {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10.5px; font-weight: 600;
+  padding: 4px 10px; border-radius: 20px;
+  cursor: pointer; transition: all .12s;
+  border: 1px solid; width: fit-content;
+}
+.taxableBtnOn {
+  background: rgba(29,207,176,.15);
+  border-color: rgba(29,207,176,.4);
+  color: var(--teal);
+}
+.taxableBtnOff {
+  background: rgba(255,255,255,.05);
+  border-color: rgba(255,255,255,.15);
+  color: rgba(255,255,255,.35);
+}
+.taxableBtnOn:hover  { background: rgba(29,207,176,.25); }
+.taxableBtnOff:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.6); }
+.taxableCheck { font-size: 11px; }
+
+/* ── Mobile footer improvements ─────────────────────── */
+@media (max-width: 900px) {
+  .panelFooter {
+    position: sticky;
+    bottom: 0;
+    background: var(--bg-panel);
+    padding: .75rem .85rem;
+    margin: 0 -.85rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+    z-index: 10;
+    box-shadow: 0 -4px 16px rgba(0,0,0,.3);
+  }
+  .calcBtn {
+    font-size: 15px;
+    padding: 13px;
+    min-height: 48px;
+    border-radius: var(--radius-md);
+    touch-action: manipulation;
+  }
+  .resetBtn {
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+}
+
+/* ── Mobile panel improvements ───────────────────── */
+@media (max-width: 900px) {
+  /* Tab bar — bigger tap targets */
+  .sidebarTab {
+    padding: 9px 4px;
+    font-size: 12px;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  /* Section headers — more breathing room */
+  .sectionHeader {
+    padding: .6rem 0 .4rem;
+    font-size: 10px;
+  }
+
+  /* Fields — bigger inputs */
+  .fieldRow { gap: .65rem; }
+
+  /* Couple mode toggle area */
+  .coupleToggle { padding: .6rem 0; }
+}
+
+/* RRSP meltdown toggle */
+.toggleRow { margin: .35rem 0 .5rem; }
+.toggleLabel {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12.5px; font-weight: 500; color: var(--text-secondary);
+  cursor: pointer;
+}
+.toggleLabel input[type="checkbox"] {
+  width: 15px; height: 15px; accent-color: var(--teal);
+  cursor: pointer; flex-shrink: 0;
+}
