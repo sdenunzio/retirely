@@ -1,0 +1,8 @@
+{
+  "portVars": [
+    "PORT"
+  ],
+  "scripts": {
+    "setup": "npm install"
+  }
+}
