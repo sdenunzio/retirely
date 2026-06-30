@@ -264,7 +264,7 @@ export function PropertyTab({ person, spouse, shared, setPField, setSField, prop
           </div>
 
           <div className={styles.wizardNav}>
-            <button className={styles.wizardBack} onClick={() => setHasProperty(false)}>← Back</button>
+            <button className={styles.wizardBack} onClick={removeAll}>← Back</button>
             <button className={styles.wizardNext} onClick={() => setWizardStep(2)}>
               Next: {inputs.ownershipMode === 'owned' ? 'Enter property details' : 'Enter purchase details'} →
             </button>
@@ -378,7 +378,7 @@ export function PropertyTab({ person, spouse, shared, setPField, setSField, prop
             Try Property Speculator
             <span className={styles.speculatorBeta}>BETA</span>
           </Link>
-          <button className={styles.resetBtn} onClick={() => setInputs(DEFAULTS)}>↺ Reset inputs</button>
+          <button className={styles.resetBtn} onClick={() => setPropertyState({ ...DEFAULTS })}>↺ Reset inputs</button>
           <button className={styles.removeBtn} onClick={removeAll}>✕ Remove property</button>
         </div>
       </div>

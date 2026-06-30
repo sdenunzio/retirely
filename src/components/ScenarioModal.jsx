@@ -9,15 +9,16 @@ export function ScenarioModal({ scenario, onClose }) {
     return () => { document.body.style.overflow = prev }
   }, [])
 
-  const ex = scenario?.fullExplanation
-  if (!scenario || !ex) return null
-
-  // Close on Escape
+  // Close on Escape — must run on every render (before any early return) to
+  // keep hook order stable per the rules of hooks.
   useEffect(() => {
     const handler = e => { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [onClose])
+
+  const ex = scenario?.fullExplanation
+  if (!scenario || !ex) return null
 
   return (
     <div className={styles.backdrop} onClick={onClose} role="dialog" aria-modal="true">
