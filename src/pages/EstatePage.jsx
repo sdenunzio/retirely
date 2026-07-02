@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { createPortal } from 'react-dom'
+import { usePageMeta } from '../hooks/usePageMeta.js'
 import styles from './EstatePage.module.css'
 
 // ─── Province probate fee calculator ─────────────────────────────────────────
@@ -927,6 +928,11 @@ function TaxImpact({ assets, province, hasSpouse }) {
 
 // ─── Main page ────────────────────────────────────────────────────────────────
 export function EstatePage() {
+  usePageMeta({
+    title: 'Estate Planning Calculator (Canada) — Probate Fees by Province | Retirely',
+    description: 'Free Canadian estate planner. Estimate provincial probate fees, model your estate, and build an executor checklist across all provinces. No sign-up.',
+    canonical: 'https://retirely.ca/estate',
+  })
   const saved = loadState()
   const [started, setStarted]   = useState(!!saved?.context)
   const [context, setContext]   = useState(saved?.context || null)

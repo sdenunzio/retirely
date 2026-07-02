@@ -1,10 +1,27 @@
 # Retirely — Apache config for Hostinger
 
-# Enable URL rewriting for SPA (HashRouter doesn't need this, but belt+suspenders)
+# Routing: pre-rendered SEO landing pages (clean URLs) + SPA fallback for the app.
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Never rewrite the SPA entry point itself.
   RewriteRule ^index\.html$ - [L]
+
+  # Don't add a trailing-slash redirect for directories — keeps canonical URLs
+  # stable (we serve flat .html files, not directory indexes).
+  DirectorySlash Off
+
+  # 1) Serve pre-rendered SEO pages at their clean, extensionless URL with NO
+  #    redirect:  /rrsp-calculator → rrsp-calculator.html (only if that file
+  #    exists). This must run BEFORE the SPA fallback below.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.+?)/?$ /$1.html [L]
+
+  # 2) SPA fallback: anything else that isn't a real file/dir (e.g. /speculator,
+  #    /estate, and client-side routes) serves the app shell.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]

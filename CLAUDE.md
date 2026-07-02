@@ -46,7 +46,7 @@ Tests, lint, and review run at three points — keep all three green:
 
 ## Architecture
 
-Three independent single-page tools, routed by `HashRouter` in `src/main.jsx` (hash routing because the app deploys as static files):
+Three independent single-page tools, routed by `BrowserRouter` in `src/main.jsx` (real path URLs — not hash — so the routes are independently crawlable/indexable). Deep links rely on the host serving `index.html` for unknown paths (see `public/.htaccess`):
 
 | Route | Component | Purpose |
 |-------|-----------|---------|
@@ -54,7 +54,17 @@ Three independent single-page tools, routed by `HashRouter` in `src/main.jsx` (h
 | `/speculator` | `src/pages/SpeculatorPage.jsx` | Rental-property / real-estate speculation analyzer |
 | `/estate` | `src/pages/EstatePage.jsx` | Estate planner (provincial probate fees, etc.) |
 
-`AppSwitcher` toggles between them. They share the `src/lib` engines but have separate state, persistence keys, and scenario hooks.
+`AppSwitcher` (react-router `Link`s) toggles between them. They share the `src/lib` engines but have separate state, persistence keys, and scenario hooks. The main calculator honours two deep-link query params on mount: `?tab=<id>` (open a tool tab) and `?scenario=<id>` (load a saved scenario).
+
+### SEO / pre-rendered content pages (`src/seo/`)
+
+The interactive app is client-rendered, so on its own it ships near-empty HTML to crawlers. To fix that, `npm run build` runs `vite build` **then** `scripts/generate-seo-pages.mjs` (`npm run seo:gen`), which writes a topic-cluster of fully pre-rendered, crawlable HTML landing pages into `dist/` — one URL per search intent (per-calculator, per-comparison, and one per province), each with rate tables pulled from the live engine, a visible FAQ, and JSON-LD (WebApplication + BreadcrumbList + FAQPage + HowTo).
+
+- **`src/seo/content.js`** — browser-free, side-effect-free data + engine-derived tables. `PAGES` (topic + programmatic province pages), `APP_ROUTES` (the two SPA tools), `sitemapUrls()`. **To add/edit a landing page, edit the data here** — don't hand-write HTML. Province slugs strip accents (Québec → `quebec`).
+- **`src/seo/render.js`** — pure string builders: `renderPage(page)` (a full document) and `buildAppShell(indexHtml, route)` (clones the built `index.html` into a route-specific shell with the correct canonical/title/content that still boots the SPA).
+- **`scripts/generate-seo-pages.mjs`** — the post-build I/O step; also regenerates `dist/sitemap.xml` + `dist/robots.txt`. Emits **flat files** (`dist/rrsp-calculator.html`), served at clean URLs by the `.htaccess` rewrite (before the SPA fallback) to avoid a trailing-slash redirect / canonical mismatch.
+- `index.html` carries a static, crawlable fallback inside `#root` (React replaces it on mount) so the app shell itself isn't empty to non-JS crawlers.
+- Data integrity (slug uniqueness, title/description lengths, related-link validity, schema presence, province coverage) is guarded by `src/seo/content.test.js`. **When rates change in `engine.js`, the on-page tables update automatically; the display constants in `SITE.benefits` (CPP/OAS maxes) must be updated by hand.**
 
 ### The calculation core (`src/lib/`)
 
