@@ -100,13 +100,17 @@ export default function App() {
       'retireplan_disclaimer_collapsed',
     ]
     keysToRemove.forEach(k => { try { localStorage.removeItem(k) } catch {} })
-    // Hard reload to / — triggers fresh first-visit wizard
-    window.location.href = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/') + '#/'
-    window.location.reload()
+    // Hard reload to the app root — triggers a fresh first-visit wizard
+    window.location.href = window.location.origin + '/'
   }
 
-  // On mount: if ?scenario=id in URL, auto-load that scenario
+  // On mount: honour deep-links from the SEO landing pages —
+  //   ?tab=fire     → open that tool tab
+  //   ?scenario=id  → auto-load a saved scenario
   useEffect(() => {
+    const tab = searchParams.get('tab')
+    if (tab && MAIN_TABS.some(t => t.id === tab)) setActiveTab(tab)
+
     const id = searchParams.get('scenario')
     if (id) {
       const loaded = scenariosHook.loadFromUrl(id, { setPerson, setSpouse, setShared, setPropertyState })

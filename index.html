@@ -176,7 +176,31 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Static, crawlable fallback. React replaces this on mount; crawlers and
+           no-JS agents get real content, the app's positioning, and internal
+           links to every calculator so the full site can be discovered. -->
+      <main style="max-width:820px;margin:0 auto;padding:2rem 1.25rem;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;color:#1a2733">
+        <h1 style="color:#0D1B2A">Free Canadian Retirement Calculator</h1>
+        <p>Retirely is a free, no-sign-up Canadian retirement calculator. Model RRSP,
+        TFSA, RRIF, CPP, OAS, GIS and defined-benefit pensions side by side, compare
+        strategies, run Monte Carlo simulations, and see your after-tax retirement
+        income in all 10 provinces — entirely in your browser.</p>
+        <p><strong>Explore the calculators:</strong></p>
+        <ul>
+          <li><a href="/canadian-retirement-calculator">Canadian retirement calculator (overview)</a></li>
+          <li><a href="/rrsp-calculator">RRSP calculator</a></li>
+          <li><a href="/tfsa-calculator">TFSA calculator</a></li>
+          <li><a href="/cpp-calculator">CPP calculator</a> &amp; <a href="/when-to-take-cpp">when to take CPP</a></li>
+          <li><a href="/rrif-minimum-withdrawal-calculator">RRIF minimum withdrawal calculator</a></li>
+          <li><a href="/oas-clawback-calculator">OAS clawback calculator</a></li>
+          <li><a href="/rrsp-vs-tfsa">RRSP vs TFSA</a></li>
+          <li><a href="/fire-calculator-canada">FIRE calculator (Canada)</a></li>
+          <li><a href="/speculator">Rental property analyzer</a> &middot; <a href="/estate">Estate planner</a></li>
+        </ul>
+        <p>Loading the interactive calculator…</p>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

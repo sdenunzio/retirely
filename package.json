@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run seo:gen",
+    "seo:gen": "node scripts/generate-seo-pages.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",

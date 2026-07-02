@@ -8,6 +8,7 @@ import { analysePropertyMulti, pct, fmtC, fmtK } from '../lib/propertyEngine.js'
 import { NumericInput } from '../components/NumericInput.jsx'
 import { Icon } from '../components/Icon.jsx'
 import { AppSwitcher } from '../components/AppSwitcher.jsx'
+import { usePageMeta } from '../hooks/usePageMeta.js'
 import styles from './SpeculatorPage.module.css'
 
 // ─── Constants ───────────────────────────────────────────────────────────────
@@ -598,6 +599,11 @@ function loadDraft() {
 
 // ─── Main page ────────────────────────────────────────────────────────────────
 export function SpeculatorPage() {
+  usePageMeta({
+    title: 'Rental Property Investment Calculator (Canada) — Cash Flow & IRR | Retirely',
+    description: 'Free Canadian rental & commercial property analyzer. Model mortgage payments, cash flow, cap rate and IRR across multiple properties and units. No sign-up.',
+    canonical: 'https://retirely.ca/speculator',
+  })
   const [properties, setProperties] = useState(() => loadDraft() ?? [DEFAULT_PROPERTY(0)])
   const [scenariosMode, setScenariosMode] = useState(null)  // null | 'save' | 'load'
   const scenariosHook = useSpeculatorScenarios()
