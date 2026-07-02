@@ -8,6 +8,7 @@
     "build": "vite build && npm run seo:gen",
     "seo:gen": "node scripts/generate-seo-pages.mjs",
     "preview": "vite preview",
+    "serve:static": "node scripts/serve-static.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint .",
