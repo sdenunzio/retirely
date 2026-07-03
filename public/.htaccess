@@ -50,4 +50,9 @@
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
+  # Enforce HTTPS for a year, including subdomains. "always" so it's sent on
+  # redirects/error responses too. The whole site is HTTPS-only on Hostinger.
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  # This is a static calculator — it needs none of these powerful features.
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 </IfModule>
