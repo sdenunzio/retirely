@@ -5,7 +5,7 @@ import styles from './AppSwitcher.module.css'
 const APPS = [
   {
     id: 'retirement',
-    path: '/',
+    path: '/calculator',
     label: 'Retirement Scenarios',
     sub: 'Plan your retirement',
     icon: (

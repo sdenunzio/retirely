@@ -100,8 +100,8 @@ export default function App() {
       'retireplan_disclaimer_collapsed',
     ]
     keysToRemove.forEach(k => { try { localStorage.removeItem(k) } catch {} })
-    // Hard reload to the app root — triggers a fresh first-visit wizard
-    window.location.href = window.location.origin + '/'
+    // Hard reload to the calculator — triggers a fresh first-visit wizard
+    window.location.href = window.location.origin + '/calculator'
   }
 
   // On mount: honour deep-links from the SEO landing pages —

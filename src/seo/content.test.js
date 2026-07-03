@@ -90,7 +90,9 @@ describe('sitemap', () => {
     const locs = urls.map((u) => u.loc)
     expect(new Set(locs).size).toBe(locs.length)
     expect(locs).toContain(`${SITE.domain}/`)
+    expect(locs).toContain(`${SITE.domain}/calculator`)
     expect(locs).toContain(`${SITE.domain}/speculator`)
+    expect(locs).toContain(`${SITE.domain}/articles`)
     for (const p of PAGES) {
       expect(locs).toContain(`${SITE.domain}/${p.slug}`)
     }
@@ -133,7 +135,7 @@ describe('renderPage', () => {
 
   it('renders a CTA into the interactive app', () => {
     expect(html).toContain('Open the free calculator')
-    expect(html).toContain('href="/?tab=')
+    expect(html).toContain('href="/calculator?tab=')
   })
 
   it('renders the RRIF rate table with the 71 factor', () => {

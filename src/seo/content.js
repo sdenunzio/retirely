@@ -570,6 +570,15 @@ export const PAGES = [...topics, ...PROVINCE_ORDER.map(provinceTopic)]
 // content summary instead of the generic homepage fallback.
 export const APP_ROUTES = [
   {
+    path: 'calculator',
+    title: 'Retirement Calculator App (Canada) — RRSP, TFSA, CPP, OAS | Retirely',
+    description:
+      'Launch the free Retirely retirement calculator. Model RRSP, TFSA, RRIF, CPP, OAS and pensions side by side across strategies, with tax for all 10 provinces, couples and Monte Carlo. No sign-up.',
+    h1: 'Retirement Calculator',
+    hero: `<p>Model your full Canadian retirement in one place: RRSP, TFSA, non-registered and LIRA/LIF accounts, CPP and OAS at any start age, GIS, defined-benefit pensions, and after-tax income across all 10 provinces. Compare standard, early, delayed-CPP and income-splitting strategies side by side, run a Monte Carlo simulation, and see your plan year by year to your life expectancy.</p>
+<p>New here? Start with the <a href="/canadian-retirement-calculator">guide to the calculator</a> or browse the <a href="/articles">retirement articles</a>.</p>`,
+  },
+  {
     path: 'speculator',
     title: 'Rental Property Investment Calculator (Canada) — Cash Flow & IRR | Retirely',
     description:
@@ -592,21 +601,28 @@ export const APP_ROUTES = [
 /** Map slug → page object. */
 export const PAGE_BY_SLUG = Object.fromEntries(PAGES.map((p) => [p.slug, p]))
 
-/** All indexable URLs (topic pages + the app routes). */
-export function sitemapUrls() {
+/**
+ * All indexable URLs: Home, the app routes, topic pages, plus the Articles hub
+ * and any article slugs passed in (articles come from Markdown at build time).
+ */
+export function sitemapUrls(articles = []) {
   const lastmod = '2026-07-02'
-  const appRoutes = ['', 'speculator', 'estate']
-  const urls = appRoutes.map((r) => ({
-    loc: `${SITE.domain}/${r}`,
-    priority: r === '' ? '1.0' : '0.7',
-    lastmod,
-  }))
+  const urls = [
+    { loc: `${SITE.domain}/`, priority: '1.0', lastmod },
+    { loc: `${SITE.domain}/calculator`, priority: '0.9', lastmod },
+    { loc: `${SITE.domain}/speculator`, priority: '0.7', lastmod },
+    { loc: `${SITE.domain}/estate`, priority: '0.7', lastmod },
+    { loc: `${SITE.domain}/articles`, priority: '0.8', lastmod },
+  ]
   for (const p of PAGES) {
     urls.push({
       loc: `${SITE.domain}/${p.slug}`,
       priority: p.isHub ? '0.9' : p.province ? '0.6' : '0.8',
       lastmod,
     })
+  }
+  for (const a of articles) {
+    urls.push({ loc: `${SITE.domain}/articles/${a.slug}`, priority: '0.7', lastmod: a.date || lastmod })
   }
   return urls
 }
