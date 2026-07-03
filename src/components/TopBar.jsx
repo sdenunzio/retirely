@@ -65,7 +65,8 @@ export function TopBar({ mobileOpen, setMobileOpen, persistence, onExport, hasRe
       {/* Left: app switcher + logo */}
       <div className={styles.left}>
         <AppSwitcher />
-        <div className={styles.logoGroup}>
+        {/* Brand links to the marketing home (static site, outside the SPA) */}
+        <a className={styles.logoGroup} href="/" title="Retirely home" style={{ textDecoration: 'none' }}>
           <LogoMark />
           <div className={styles.brand}>
             <div className={styles.brandTop}>
@@ -74,7 +75,7 @@ export function TopBar({ mobileOpen, setMobileOpen, persistence, onExport, hasRe
             </div>
             <span className={styles.sub}>Retirement Scenarios</span>
           </div>
-        </div>
+        </a>
       </div>
 
       {/* Right: controls */}

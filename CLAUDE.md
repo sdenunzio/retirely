@@ -46,25 +46,35 @@ Tests, lint, and review run at three points — keep all three green:
 
 ## Architecture
 
-Three independent single-page tools, routed by `BrowserRouter` in `src/main.jsx` (real path URLs — not hash — so the routes are independently crawlable/indexable). Deep links rely on the host serving `index.html` for unknown paths (see `public/.htaccess`):
+Retirely is a **static marketing site with the React calculator as one sub-app**. Two layers:
 
-| Route | Component | Purpose |
+1. **Static site (prerendered HTML, no React):** the marketing Home (`/`), the Articles hub (`/articles`) + Markdown articles (`/articles/<slug>`), and the SEO topic pages (per-calculator, per-comparison, per-province). Fast and fully crawlable.
+2. **React SPA (`BrowserRouter` in `src/main.jsx`):** the interactive tools, served from prerendered shells that boot the same bundle. Real path URLs (not hash) so each is independently indexable. Deep links rely on the host serving the right file / `index.html` (see `public/.htaccess`).
+
+| Route | Component / source | Purpose |
 |-------|-----------|---------|
-| `/` | `src/App.jsx` | Main retirement scenario calculator |
-| `/speculator` | `src/pages/SpeculatorPage.jsx` | Rental-property / real-estate speculation analyzer |
-| `/estate` | `src/pages/EstatePage.jsx` | Estate planner (provincial probate fees, etc.) |
+| `/` | `src/site/home.js` (static) | Marketing home |
+| `/articles`, `/articles/<slug>` | `src/site/articles.js` + `content/articles/*.md` | Articles hub + posts |
+| `/rrsp-calculator` … (19) | `src/seo/` (static) | SEO topic/province landing pages |
+| `/calculator` | `src/App.jsx` (SPA) | Main retirement scenario calculator |
+| `/speculator` | `src/pages/SpeculatorPage.jsx` (SPA) | Rental-property analyzer |
+| `/estate` | `src/pages/EstatePage.jsx` (SPA) | Estate planner |
 
-`AppSwitcher` (react-router `Link`s) toggles between them. They share the `src/lib` engines but have separate state, persistence keys, and scenario hooks. The main calculator honours two deep-link query params on mount: `?tab=<id>` (open a tool tab) and `?scenario=<id>` (load a saved scenario).
+`AppSwitcher` (react-router `Link`s) toggles between the three tools; the app's `TopBar` logo links back to the static Home. The main calculator honours two deep-link query params on mount: `?tab=<id>` (open a tool tab — SEO CTAs use `/calculator?tab=…`) and `?scenario=<id>` (load a saved scenario).
 
-### SEO / pre-rendered content pages (`src/seo/`)
+### The static site + SEO generator
 
-The interactive app is client-rendered, so on its own it ships near-empty HTML to crawlers. To fix that, `npm run build` runs `vite build` **then** `scripts/generate-seo-pages.mjs` (`npm run seo:gen`), which writes a topic-cluster of fully pre-rendered, crawlable HTML landing pages into `dist/` — one URL per search intent (per-calculator, per-comparison, and one per province), each with rate tables pulled from the live engine, a visible FAQ, and JSON-LD (WebApplication + BreadcrumbList + FAQPage + HowTo).
+The interactive app is client-rendered, so on its own it ships near-empty HTML to crawlers. `npm run build` runs `vite build` **then** `scripts/generate-seo-pages.mjs` (`npm run seo:gen`), which turns the built SPA into a full static site in `dist/`: the Home page (overwrites the SPA `index.html`), the Articles hub + each article, the topic-cluster pages (rate tables from the live engine, visible FAQ, JSON-LD), the SPA shells (`calculator.html`, `speculator.html`, `estate.html`), and `sitemap.xml` + `robots.txt`. Every page is fully prerendered so crawlers/AI get the complete picture without running JS.
 
-- **`src/seo/content.js`** — browser-free, side-effect-free data + engine-derived tables. `PAGES` (topic + programmatic province pages), `APP_ROUTES` (the two SPA tools), `sitemapUrls()`. **To add/edit a landing page, edit the data here** — don't hand-write HTML. Province slugs strip accents (Québec → `quebec`).
-- **`src/seo/render.js`** — pure string builders: `renderPage(page)` (a full document) and `buildAppShell(indexHtml, route)` (clones the built `index.html` into a route-specific shell with the correct canonical/title/content that still boots the SPA).
-- **`scripts/generate-seo-pages.mjs`** — the post-build I/O step; also regenerates `dist/sitemap.xml` + `dist/robots.txt`. Emits **flat files** (`dist/rrsp-calculator.html`), served at clean URLs by the `.htaccess` rewrite (before the SPA fallback) to avoid a trailing-slash redirect / canonical mismatch.
-- `index.html` carries a static, crawlable fallback inside `#root` (React replaces it on mount) so the app shell itself isn't empty to non-JS crawlers.
-- Data integrity (slug uniqueness, title/description lengths, related-link validity, schema presence, province coverage) is guarded by `src/seo/content.test.js`. **When rates change in `engine.js`, the on-page tables update automatically; the display constants in `SITE.benefits` (CPP/OAS maxes) must be updated by hand.**
+- **`src/site/brand.js`** — the shared chrome: the **real Retirely mark** (the app's beaker/bar-chart inline SVG + "Retirely" wordmark — NOT the stale `public/logo.svg` "RetirePlan.CA" asset), `siteHeader`/`siteFooter`, and `PAGE_CSS`. Used by every static page.
+- **`src/site/home.js`** — `renderHome({ articles })` (the marketing page).
+- **`src/site/articles.js`** — `loadArticles(dir)` (Markdown via `gray-matter` + `marked`), `renderArticle`, `renderArticlesHub`. **To add an article, drop a `content/articles/<slug>.md`** with frontmatter (`title, description, date (YYYY-MM-DD), tags, related?, calculator?, faqs?`).
+- **`src/seo/content.js`** — data + engine-derived tables. `PAGES` (topic + province pages), `APP_ROUTES` (the 3 SPA tools), `sitemapUrls(articles)`. **Edit landing-page data here, not HTML.** Province slugs strip accents (Québec → `quebec`).
+- **`src/seo/render.js`** — `renderPage(page)` (uses the shared brand chrome) and `buildAppShell(indexHtml, route)` (clones the built shell with the correct canonical/title/content, still boots the SPA).
+- Pages are emitted as **flat files** (`dist/rrsp-calculator.html`), served at clean URLs by the `.htaccess` rewrite (before the SPA fallback) to avoid a trailing-slash redirect / canonical mismatch.
+- Integrity guarded by `src/seo/content.test.js` + `src/site/site.test.js`. **When rates change in `engine.js` the on-page tables update automatically; the display constants in `SITE.benefits` (CPP/OAS maxes) are updated by hand.**
+
+Local preview of the whole site exactly as the host serves it: `npm run build && npm run serve:static`.
 
 ### The calculation core (`src/lib/`)
 

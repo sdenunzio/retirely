@@ -8,6 +8,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { SITE, PAGE_BY_SLUG, esc } from './content.js'
+import { siteHeader, siteFooter, PAGE_CSS, FONT_LINKS, APP_URL } from '../site/brand.js'
 
 const url = (slug) => `${SITE.domain}/${slug}`
 
@@ -66,11 +67,9 @@ function head(page) {
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0D1B2A" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    ${FONT_LINKS}
 
-    <style>${CSS}</style>
+    <style>${PAGE_CSS}</style>
     ${schema(page)}`
 }
 
@@ -187,7 +186,7 @@ function breadcrumbHtml(page) {
 }
 
 function ctaHtml(page) {
-  const href = page.ctaTab ? `/?tab=${page.ctaTab}` : '/'
+  const href = page.ctaTab ? `${APP_URL}?tab=${page.ctaTab}` : APP_URL
   return `<div class="cta">
     <a class="cta-btn" href="${href}">Open the free calculator →</a>
     <p class="cta-note">${esc('Free · no sign-up · all 10 provinces · couples & Monte Carlo built in.')}</p>
@@ -202,15 +201,7 @@ export function renderPage(page) {
     ${head(page)}
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="/"><img src="/logo.svg" alt="Retirely" width="120" height="28" /></a>
-      <nav class="top-nav" aria-label="Primary">
-        <a href="/canadian-retirement-calculator">Calculators</a>
-        <a href="/when-to-take-cpp">When to take CPP</a>
-        <a href="/rrif-minimum-withdrawal-calculator">RRIF minimums</a>
-        <a class="nav-cta" href="/">Launch app</a>
-      </nav>
-    </header>
+    ${siteHeader('calculators')}
 
     <main class="page">
       ${breadcrumbHtml(page)}
@@ -225,72 +216,7 @@ export function renderPage(page) {
       ${relatedHtml(page)}
     </main>
 
-    <footer class="site-footer">
-      <p><strong>Retirely</strong> — free Canadian retirement scenario calculator.
-      Illustrative only; not financial, tax or investment advice.</p>
-      <nav aria-label="Footer">
-        <a href="/">Retirement calculator</a>
-        <a href="/speculator">Rental property analyzer</a>
-        <a href="/estate">Estate planner</a>
-        <a href="/canadian-retirement-calculator">All calculators</a>
-      </nav>
-      <p class="copy">© 2024–2026 Retirely (retirely.ca). All rights reserved.</p>
-    </footer>
+    ${siteFooter()}
   </body>
 </html>`
 }
-
-// ── Styles ───────────────────────────────────────────────────────────────────
-const CSS = `
-:root{--navy:#0D1B2A;--ink:#1a2733;--muted:#5b6b7a;--teal:#0f9d8f;--teal-d:#0b7d72;--line:#e3e8ee;--bg:#f7f9fb;--card:#fff}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:'DM Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
-a{color:var(--teal-d);text-decoration:none}
-a:hover{text-decoration:underline}
-.site-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 1.25rem;background:var(--navy);position:sticky;top:0;z-index:5}
-.brand img{display:block;height:28px;width:auto}
-.top-nav{display:flex;gap:1.1rem;flex-wrap:wrap;align-items:center}
-.top-nav a{color:#cdd8e3;font-size:.92rem;font-weight:500}
-.top-nav a:hover{color:#fff;text-decoration:none}
-.top-nav .nav-cta{background:var(--teal);color:#fff;padding:.45rem .85rem;border-radius:8px}
-.page{max-width:800px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
-.crumbs{font-size:.85rem;color:var(--muted);margin:.5rem 0 1.25rem}
-.crumbs .sep{margin:0 .45rem;color:#aab6c2}
-h1{font-size:2.1rem;line-height:1.15;letter-spacing:-.02em;margin:.2rem 0 .6rem;color:var(--navy)}
-h2{font-size:1.4rem;letter-spacing:-.01em;margin:2.2rem 0 .6rem;color:var(--navy)}
-h3{font-size:1.08rem;margin:1.2rem 0 .3rem;color:var(--ink)}
-.lead{font-size:1.18rem;color:#33424f;margin:.4rem 0 1.4rem}
-p{margin:.6rem 0}
-ul{padding-left:1.2rem}
-li{margin:.3rem 0}
-.muted{color:var(--muted);font-size:.9rem}
-.tbl{margin:1.1rem 0;overflow-x:auto}
-.tbl figcaption{font-size:.85rem;color:var(--muted);margin-bottom:.4rem}
-table{border-collapse:collapse;width:100%;font-size:.95rem;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-th,td{padding:.55rem .8rem;text-align:left;border-bottom:1px solid var(--line)}
-th{background:#eef3f7;font-weight:600;color:var(--navy)}
-tbody tr:last-child td{border-bottom:0}
-tbody tr:nth-child(even){background:#fafcfd}
-.cta{background:linear-gradient(135deg,#0D1B2A,#132b3f);color:#fff;border-radius:14px;padding:1.4rem;text-align:center;margin:1.6rem 0}
-.cta-btn{display:inline-block;background:var(--teal);color:#fff;font-weight:600;font-size:1.05rem;padding:.8rem 1.5rem;border-radius:10px}
-.cta-btn:hover{background:#12b3a3;text-decoration:none}
-.cta-note{color:#b9c6d2;font-size:.86rem;margin:.7rem 0 0}
-.cluster{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.5rem}
-.cluster li{margin:0}
-.cluster a{display:block;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;font-weight:500}
-.cluster a:hover{border-color:var(--teal);text-decoration:none}
-.faq{margin-top:2.4rem}
-.faq-item{border-top:1px solid var(--line);padding-top:.4rem;margin-top:1rem}
-.faq-item h3{margin-top:.4rem}
-.related{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem}
-.related-grid{display:flex;flex-wrap:wrap;gap:.5rem}
-.related-grid a{background:#eef3f7;border-radius:20px;padding:.4rem .9rem;font-size:.9rem;font-weight:500}
-.related-grid a:hover{background:#e0eaf0;text-decoration:none}
-.site-footer{background:var(--navy);color:#aab6c2;padding:2rem 1.25rem;text-align:center;font-size:.9rem}
-.site-footer strong{color:#fff}
-.site-footer nav{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:.8rem 0}
-.site-footer a{color:#cdd8e3}
-.site-footer .copy{font-size:.8rem;color:#7c8b99;margin-top:.6rem}
-@media(max-width:560px){h1{font-size:1.7rem}.lead{font-size:1.05rem}.site-header{flex-direction:column;align-items:flex-start;gap:.6rem}}
-`
