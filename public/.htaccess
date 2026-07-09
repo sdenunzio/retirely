@@ -5,6 +5,13 @@
   RewriteEngine On
   RewriteBase /
 
+  # Canonical host: force www → non-www with a single 301. retirely.ca is the
+  # canonical domain (matches every <link rel="canonical">, the sitemap and
+  # robots.txt), so this consolidates all signals onto one host and stops
+  # Search Console reporting the www copies as duplicates.
+  RewriteCond %{HTTP_HOST} ^www\.retirely\.ca$ [NC]
+  RewriteRule ^ https://retirely.ca%{REQUEST_URI} [L,R=301]
+
   # Never rewrite the SPA entry point itself.
   RewriteRule ^index\.html$ - [L]
 
@@ -20,12 +27,16 @@
   RewriteCond %{DOCUMENT_ROOT}/$1.html -f
   RewriteRule ^(.+?)/?$ /$1.html [L]
 
-  # 2) SPA fallback: anything else that isn't a real file/dir (e.g. /speculator,
-  #    /estate, and client-side routes) serves the app shell.
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  # 2) No blind SPA fallback. Every real URL is backed by a file: the app routes
+  #    (/calculator, /speculator, /estate) each have a pre-rendered shell, and
+  #    all SEO/article pages are flat .html files (both served by rule 1 above).
+  #    So anything that reaches this point is a genuinely unknown URL — let it
+  #    fall through to Apache's 404 + ErrorDocument below instead of serving the
+  #    homepage with a 200 (which Search Console flags as a "soft 404").
 </IfModule>
+
+# Real 404 for unknown URLs (a true 404 status, not a soft-404 200).
+ErrorDocument 404 /404.html
 
 # Compression
 <IfModule mod_deflate.c>
