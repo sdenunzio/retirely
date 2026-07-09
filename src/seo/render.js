@@ -193,6 +193,48 @@ function ctaHtml(page) {
   </div>`
 }
 
+// ── 404 page ─────────────────────────────────────────────────────────────────
+// Served by `ErrorDocument 404 /404.html` with a genuine 404 status. noindex so
+// crawlers don't index the error page itself; no canonical (it isn't a real
+// destination). On-brand chrome + a few recovery links back into the site.
+export function renderNotFound() {
+  const links = ['canadian-retirement-calculator', 'rrsp-calculator', 'tfsa-calculator', 'cpp-calculator']
+    .map((slug) => PAGE_BY_SLUG[slug])
+    .filter(Boolean)
+    .map((p) => `<li><a href="/${p.slug}">${esc(p.h1)}</a></li>`)
+    .join('')
+  return `<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — ${SITE.name}</title>
+    <meta name="robots" content="noindex, follow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="theme-color" content="#0D1B2A" />
+    ${FONT_LINKS}
+    <style>${PAGE_CSS}</style>
+  </head>
+  <body>
+    ${siteHeader()}
+
+    <main class="page">
+      <h1>Page not found</h1>
+      <p class="lead">Sorry — that page doesn't exist or has moved. Try one of these instead:</p>
+      <ul class="cluster">
+        <li><a href="/">Retirely home</a></li>
+        <li><a href="${APP_URL}">Retirement calculator</a></li>
+        <li><a href="/articles">Articles &amp; guides</a></li>
+        ${links}
+      </ul>
+    </main>
+
+    ${siteFooter()}
+  </body>
+</html>`
+}
+
 // ── Full document ────────────────────────────────────────────────────────────
 export function renderPage(page) {
   return `<!doctype html>
