@@ -22,8 +22,16 @@
   # 1) Serve pre-rendered SEO pages at their clean, extensionless URL with NO
   #    redirect:  /rrsp-calculator → rrsp-calculator.html (only if that file
   #    exists). This must run BEFORE the SPA fallback below.
+  #
+  #    We deliberately do NOT exclude directories here (no `!-d`). "/articles"
+  #    is backed by the flat file articles.html BUT there is also an articles/
+  #    directory (holding the per-article pages). With a `!-d` guard the rule
+  #    would skip "/articles", Apache would 301 to "/articles/", and — with no
+  #    directory index and listing forbidden — return a 403. Because the target
+  #    `.html` existence is checked explicitly below, and mod_rewrite runs
+  #    before mod_dir, a matching flat file is served before any directory
+  #    handling can kick in.
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{DOCUMENT_ROOT}/$1.html -f
   RewriteRule ^(.+?)/?$ /$1.html [L]
 
