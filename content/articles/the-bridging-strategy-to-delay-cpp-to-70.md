@@ -3,7 +3,7 @@ title: "The bridging strategy: living off savings to delay CPP to 70"
 description: Delaying CPP to 70 boosts it 42% for life. Here's how to bridge the gap with your own savings — and when it's worth it.
 date: 2026-06-20
 tags: [CPP, Strategy]
-related: [the-order-to-draw-down-your-accounts, seven-ways-to-cut-tax-in-retirement]
+related: [how-much-cpp-will-you-actually-get, the-order-to-draw-down-your-accounts, when-to-take-oas-65-or-70]
 calculator: { slug: when-to-take-cpp, label: Compare CPP at 60, 65 and 70, tab: scenarios }
 faqs:
   - q: Is it worth delaying CPP to 70?
