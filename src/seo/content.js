@@ -604,9 +604,14 @@ export const PAGE_BY_SLUG = Object.fromEntries(PAGES.map((p) => [p.slug, p]))
 /**
  * All indexable URLs: Home, the app routes, topic pages, plus the Articles hub
  * and any article slugs passed in (articles come from Markdown at build time).
+ *
+ * `buildDate` (YYYY-MM-DD) stamps the `lastmod` for the non-article URLs so each
+ * build emits a fresh freshness signal to crawlers. The build script passes the
+ * real build date; callers that omit it (e.g. tests) get a stable fallback so
+ * the function stays deterministic.
  */
-export function sitemapUrls(articles = []) {
-  const lastmod = '2026-07-02'
+export function sitemapUrls(articles = [], buildDate) {
+  const lastmod = buildDate || '2026-07-02'
   const urls = [
     { loc: `${SITE.domain}/`, priority: '1.0', lastmod },
     { loc: `${SITE.domain}/calculator`, priority: '0.9', lastmod },

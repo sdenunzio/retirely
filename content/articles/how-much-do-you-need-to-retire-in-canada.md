@@ -20,7 +20,7 @@ Your retirement number is driven by your **annual after-tax spending**. Track wh
 
 ## Subtract guaranteed income
 
-This is where Canada is different from the U.S. examples you'll read online. **CPP and OAS are guaranteed, inflation-indexed income for life.** A couple who both qualify for solid CPP plus OAS might receive $40,000–$50,000 a year between them — income your portfolio doesn't have to provide.
+This is where Canada is different from the U.S. examples you'll read online. **CPP and OAS are guaranteed, inflation-indexed income for life.** How much you get depends heavily on your CPP contribution history. A couple who both land near the *maximum* CPP plus full OAS could see roughly $45,000–$52,000 a year between them — but that's the ceiling, not the norm. Most people don't reach the maximum: the average new CPP pension is a little over $800 a month, so a more typical couple is closer to $30,000–$37,000. Either way, it's income your portfolio doesn't have to provide — just be careful not to overestimate it. ([Here's what actually drives your CPP amount](/articles/how-much-cpp-will-you-actually-get).)
 
 So the real question is: *how big is the gap between your spending and your government benefits?* Your portfolio only has to fill that gap.
 

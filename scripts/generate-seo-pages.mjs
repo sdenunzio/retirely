@@ -45,8 +45,12 @@ async function writePage(slug, html) {
   await writeFile(outFile, html, 'utf8')
 }
 
+// Stamp the sitemap's lastmod with the actual build date so every deploy signals
+// freshness to crawlers (Google recrawls partly off changed lastmod dates).
+const BUILD_DATE = new Date().toISOString().slice(0, 10)
+
 function sitemapXml(articles) {
-  const urls = sitemapUrls(articles)
+  const urls = sitemapUrls(articles, BUILD_DATE)
     .map(
       (u) =>
         `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${u.lastmod}</lastmod>\n` +
