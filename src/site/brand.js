@@ -68,20 +68,38 @@ export function siteFooter() {
       <a href="/speculator">Rental property</a>
       <a href="/estate">Estate planner</a>
     </nav>
+    <nav class="foot-legal" aria-label="Legal">
+      <a href="/privacy">Privacy</a>
+      <span class="foot-sep">·</span>
+      <a href="/terms">Terms &amp; Disclaimer</a>
+    </nav>
     <p class="foot-copy">© 2024–2026 Retirely (retirely.ca). All rights reserved.</p>
   </footer>`
 }
 
-// Google Fonts + preconnect, shared by every static page's <head>.
-export const FONT_LINKS = `<link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />`
+// Self-hosted fonts (DM Sans + DM Mono, latin subset) — NO third-party request.
+// The woff2 files live in public/fonts/ (downloaded by scripts/fetch-fonts.mjs)
+// and are copied to dist/ by Vite. This @font-face block is embedded in PAGE_CSS
+// below so every static page renders the brand type with zero external calls.
+export const FONT_FACE = `@font-face{font-family:'DM Sans';font-style:italic;font-weight:300;font-display:swap;src:url(/fonts/dm-sans-300-italic.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300;font-display:swap;src:url(/fonts/dm-sans-300.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-sans-400.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-sans-500.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/dm-sans-600.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/dm-sans-700.woff2) format('woff2')}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-mono-400.woff2) format('woff2')}
+@font-face{font-family:'DM Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-mono-500.woff2) format('woff2')}`
+
+// Preload the primary body weight so first paint isn't blocked. Same-origin, so
+// no crossorigin/preconnect needed. Injected into every static page's <head>.
+export const FONT_LINKS = `<link rel="preload" href="/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin />`
 
 // Shared stylesheet — dark-navy + teal brand, DM Sans (shared with the app, so
 // identity-preserved). Content pages are light; the Home hero, footer and CTA
 // bands are dark. No emoji icons, no repeated card grids — sections vary their
 // layout so the page reads as designed, not templated.
 export const PAGE_CSS = `
+${FONT_FACE}
 :root{
   --navy:#0D1B2A;--navy2:#0F2E3F;--ink:#16232f;--body:#37485a;--muted:#556472;
   --teal:#12b3a3;--teal-d:#0b7d72;--teal-br:#1FCFB0;--teal-ink:#06231d;
@@ -161,6 +179,10 @@ tbody tr:nth-child(even){background:#fafcfd}
 .foot-nav{display:flex;gap:1.1rem;justify-content:center;flex-wrap:wrap;margin:1.1rem 0}
 .foot-nav a{color:#cdd8e3}
 .foot-nav a:hover{color:#fff}
+.foot-legal{display:flex;gap:.6rem;justify-content:center;align-items:center;flex-wrap:wrap;margin:.9rem 0 .2rem;font-size:.85rem}
+.foot-legal a{color:#9fb0bf}
+.foot-legal a:hover{color:#fff}
+.foot-sep{color:#5c6b7a}
 .foot-copy{font-size:.8rem;color:#748393;margin-top:.7rem}
 /* ── Home ── */
 .hero{position:relative;overflow:hidden;background:radial-gradient(900px 460px at 78% -20%,rgba(31,207,176,.2),transparent 60%),radial-gradient(700px 500px at 8% 120%,rgba(31,207,176,.09),transparent 55%),linear-gradient(165deg,#0c1a29,#0f2c3d);color:#fff;padding:clamp(3.5rem,7vw,6rem) 0 clamp(4rem,8vw,6.5rem)}

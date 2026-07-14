@@ -618,6 +618,8 @@ export function sitemapUrls(articles = [], buildDate) {
     { loc: `${SITE.domain}/speculator`, priority: '0.7', lastmod },
     { loc: `${SITE.domain}/estate`, priority: '0.7', lastmod },
     { loc: `${SITE.domain}/articles`, priority: '0.8', lastmod },
+    { loc: `${SITE.domain}/privacy`, priority: '0.3', lastmod },
+    { loc: `${SITE.domain}/terms`, priority: '0.3', lastmod },
   ]
   for (const p of PAGES) {
     urls.push({

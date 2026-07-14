@@ -49,10 +49,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Retirely" />
 
-    <!-- ── Performance hints ──────────────────────────────────── -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- ── Fonts (self-hosted, no third-party request) ─────────── -->
+    <!-- @font-face lives in src/index.css; preload the primary body weight. -->
+    <link rel="preload" href="/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- ── Structured data (JSON-LD) ──────────────────────────── -->
     <script type="application/ld+json">
