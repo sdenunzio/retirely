@@ -22,6 +22,7 @@ import { PAGES, APP_ROUTES, SITE, sitemapUrls } from '../src/seo/content.js'
 import { renderPage, buildAppShell, renderNotFound } from '../src/seo/render.js'
 import { renderHome } from '../src/site/home.js'
 import { loadArticles, renderArticle, renderArticlesHub } from '../src/site/articles.js'
+import { LEGAL_PAGES, renderLegalPage } from '../src/site/legal.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
@@ -92,21 +93,28 @@ async function main() {
     await writePage(`articles/${a.slug}`, renderArticle(a, bySlug))
   }
 
-  // 4) Marketing Home — overwrites the SPA entry at dist/index.html.
+  // 4) Legal pages (Privacy, Terms & Disclaimer) → flat files at clean URLs.
+  for (const page of LEGAL_PAGES) {
+    await writePage(page.slug, renderLegalPage(page))
+  }
+
+  // 5) Marketing Home — overwrites the SPA entry at dist/index.html.
   await writeFile(join(DIST, 'index.html'), renderHome({ articles }), 'utf8')
 
-  // 5) sitemap + robots (include every article). 404 is intentionally NOT in
+  // 6) sitemap + robots (include every article). 404 is intentionally NOT in
   //    the sitemap — it's a noindex error page served via ErrorDocument.
   await writeFile(join(DIST, 'sitemap.xml'), sitemapXml(articles), 'utf8')
   await writeFile(join(DIST, 'robots.txt'), robotsTxt(), 'utf8')
 
-  // 6) Custom 404 page (served with a true 404 status by .htaccess ErrorDocument).
+  // 7) Custom 404 page (served with a true 404 status by .htaccess ErrorDocument).
   await writeFile(join(DIST, '404.html'), renderNotFound(), 'utf8')
 
-  const total = APP_ROUTES.length + PAGES.length + 1 + articles.length + 1 // +hub +home
+  const total =
+    APP_ROUTES.length + PAGES.length + 1 + articles.length + LEGAL_PAGES.length + 1 // +hub +home
   console.log(
     `✓ Built ${total} static pages: Home + ${APP_ROUTES.length} app shells + ` +
-      `${PAGES.length} topic pages + Articles hub + ${articles.length} articles. ` +
+      `${PAGES.length} topic pages + Articles hub + ${articles.length} articles + ` +
+      `${LEGAL_PAGES.length} legal pages. ` +
       `sitemap.xml (${sitemapUrls(articles).length} URLs) + robots.txt`,
   )
 }

@@ -388,6 +388,10 @@ export default function App() {
         <div className={styles.footerMeta}>
           <span>© {new Date().getFullYear()} <a href="https://retirely.ca" target="_blank" rel="noopener noreferrer" className={styles.footerLink}>retirely.ca</a></span>
           <span className={styles.footerDot}>·</span>
+          <a href="/privacy" className={styles.footerLink}>Privacy</a>
+          <span className={styles.footerDot}>·</span>
+          <a href="/terms" className={styles.footerLink}>Terms</a>
+          <span className={styles.footerDot}>·</span>
           <span className={styles.betaNote}>Beta · calculations subject to change</span>
         </div>
       </footer>
